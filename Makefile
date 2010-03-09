@@ -1,12 +1,4 @@
-ifndef CC
-CC = gcc
-endif
-
-CFLAGS = $(CCFLAGS) \
-	-lm \
-	-Werror \
-	-O2 \
-	-m32
+CC ?= gcc
 
 C_SRCS = src/filterkit.c src/resample.c src/resamplesubs.c
 HEADERS = include/libresample.h src/config.h src/filterkit.h src/resample_defs.h
@@ -28,4 +20,3 @@ $(C_OBJS): objs/%.o: %.c $(HEADERS)
 resample_lib: $(C_OBJS)
 	ar rcs libresample.a \
 	$(C_OBJS)
-
