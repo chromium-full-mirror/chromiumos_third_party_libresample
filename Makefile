@@ -3,7 +3,7 @@ CC ?= gcc
 C_SRCS = src/filterkit.c src/resample.c src/resamplesubs.c
 HEADERS = include/libresample.h src/config.h src/filterkit.h src/resample_defs.h
 
-all: clean dirs resample_lib
+all: clean dirs libresample.a
 	@echo "Done building."
 
 clean:
@@ -17,6 +17,5 @@ C_OBJS = $(C_SRCS:%.c=objs/%.o)
 $(C_OBJS): objs/%.o: %.c $(HEADERS)
 	$(CC) -c $(CFLAGS) -fPIC -Iobjs/ $< -o $@
 
-resample_lib: $(C_OBJS)
-	ar rcs libresample.a \
-	$(C_OBJS)
+libresample.a: $(C_OBJS)
+	$(AR) rcs $@ $^
