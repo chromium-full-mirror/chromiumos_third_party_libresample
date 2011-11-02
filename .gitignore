@@ -1,0 +1,9 @@
+lib*.a
+*.o
+
+autom4te.cache/
+config.log
+config.status
+
+src/config.h
+tests/testresample

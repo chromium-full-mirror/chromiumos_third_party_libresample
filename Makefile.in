@@ -12,6 +12,15 @@ AR = @AR@
 RANLIB = @RANLIB@
 srcdir=@srcdir@
 
+INSTALL = @INSTALL@
+INSTALL_DATA = @INSTALL_DATA@
+MKDIR_P = @MKDIR_P@
+
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+includedir = @includedir@
+libdir = @libdir@
+
 OBJS = \
 	src/resample.c.o \
 	src/resamplesubs.c.o \
@@ -55,3 +64,9 @@ dist: clean
 $(OBJS): %.c.o: $(srcdir)/%.c Makefile $(srcdir)/include/libresample.h \
 	$(srcdir)/src/resample_defs.h $(srcdir)/src/filterkit.h $(srcdir)/src/config.h
 	$(CC) -c $(CFLAGS) $< -o $@
+
+install: $(TARGETS)
+	$(MKDIR_P) $(DESTDIR)$(includedir)/libresample
+	$(INSTALL_DATA) include/*.h $(DESTDIR)$(includedir)/libresample/
+	$(MKDIR_P) $(DESTDIR)$(libdir)
+	$(INSTALL_DATA) libresample.a $(DESTDIR)$(libdir)/
